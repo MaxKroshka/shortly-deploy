@@ -37,3 +37,29 @@ db.knex.schema.hasTable('users').then(function(exists) {
 });
 
 module.exports = db;
+
+
+
+
+var path = require('path');
+var http = require('http');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/mongoDB');
+
+
+var urls = new Schema({
+      'id' : { type: Number, unique: true},
+      'url' : String, 
+      'baseUrl': String,
+      'code' : String,
+      'title': String,
+      'visits': Number
+});
+
+var users = new Schema({
+      'id' : { type: Number, unique: true},
+      'username' : {type: String, unique: true},
+      'password' : String
+});
+
