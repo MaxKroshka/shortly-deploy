@@ -1,6 +1,7 @@
 var express = require('express');
 var partials = require('express-partials');
 var util = require('./lib/utility');
+var favicon = require('serve-favicon');
 
 var handler = require('./lib/request-handler');
 
@@ -14,6 +15,7 @@ app.configure(function() {
   app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser('shhhh, very secret'));
   app.use(express.session());
+  app.use(favicon(__dirname + '/views/favicon.ico'));
 });
 
 app.get('/', util.checkUser, handler.renderIndex);

@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
 
-var URL = process.env.MONGO_URL || 'mongodb://localhost/';
-
-mongoose.connect(URL);
+mongoose.connect('mongodb://localhost/shortlydb');
 
 var db = mongoose.connection;
 
 db.on('error', console.error);
-db.once('open', function () {
+db.once('open', function() {
   console.log('connected.');
 });
 
