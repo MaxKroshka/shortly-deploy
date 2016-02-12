@@ -55,6 +55,15 @@ module.exports = function(grunt) {
 
 
     cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'public',
+          src: ['*.css', '!*.min.css'],
+          dest: 'public/dist',
+          ext: '.min.css'
+        }]
+      }
     },
 
     watch: {
@@ -76,6 +85,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command: 'gut push live master'
       }
     },
   });
@@ -115,11 +125,11 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
 
-  grunt.registerTask('test', [
+  grunt.registerTask('test', ['eslint', 
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', ['concat', 'uglify', 'eslint', 'test']);
+  grunt.registerTask('build', ['test', 'concat', 'uglify', 'cssmin']);
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
@@ -128,10 +138,7 @@ module.exports = function(grunt) {
       grunt.task.run([ 'server-dev' ]);
     }
   });
-
   grunt.registerTask('push', ['gitpush']);
   grunt.registerTask('deploy', [ 'build', 'push']);
-
-  grunt.registerTask('default', ['nodemon']);
 
 };
