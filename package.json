@@ -4,6 +4,7 @@
   "description": "Learn all about deployment",
   "main": "server.js",
   "repository": "",
+  "author": "Max Kroshka",
   "license": "Proprietary",
   "private": true,
   "dependencies": {
